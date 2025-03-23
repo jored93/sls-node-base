@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../src/handlers/FindUser.ts"],
+  "sourcesContent": ["export async function handler(event: any){\n    console.log('Event', event)\n\n    return {\n        statusCode: 200,\n        body: JSON.stringify({\n            foo: \"bar\"\n        })\n    }\n}"],
+  "mappings": ";;;;;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA,eAAsB,QAAQ,OAAW;AACrC,UAAQ,IAAI,SAAS,KAAK;AAE1B,SAAO;AAAA,IACH,YAAY;AAAA,IACZ,MAAM,KAAK,UAAU;AAAA,MACjB,KAAK;AAAA,IACT,CAAC;AAAA,EACL;AACJ;",
+  "names": []
+}

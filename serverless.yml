@@ -1,0 +1,68 @@
+service: serverless-project-name
+
+provider:
+  name: aws
+  runtime: nodejs22.x
+  stage: ${opt:stage, 'dev'}
+  region: 'us-east-1'
+
+custom:
+  basePath:
+    dev: dev
+    uat: uat
+    prod: ""
+
+functions:
+  getUsers:
+    handler: src/handlers/GetUsers.handler
+    description: Get all users in platform
+    events:
+      - http:
+          path: /users/get-all-users
+          method: get
+          cors: true
+
+  findUser:
+    handler: src/handlers/FindUser.handler
+    description: Get all users in platform
+    events:
+      - http:
+          path: /users/find-user
+          method: post
+          cors: true
+          private: true
+
+  createUsers:
+    handler: src/handlers/CreateUsers.handler
+    description: Create users in platform
+    events:
+      - http:
+          path: /users/create-user
+          method: post
+          cors: true
+          private: true
+
+
+plugins:
+  - serverless-offline
+
+resources:
+  Resources:
+    HttpApi:
+      Type: AWS::ApiGatewayV2::Api
+      Properties:
+        Name: ${self:service}-${self:provider.stage}
+        ProtocolType: HTTP
+        CorsConfiguration:
+          AllowOrigins:
+            - "*"
+          AllowMethods:
+            - GET
+            - POST
+            - PUT
+            - DELETE
+            - OPTIONS
+
+  Outputs:
+    HttpApiUrl:
+      Value: !Sub "https://${HttpApi}.execute-api.${AWS::Region}.amazonaws.com/${self:custom.basePath.${self:provider.stage}}"
