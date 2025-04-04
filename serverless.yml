@@ -5,6 +5,8 @@ provider:
   runtime: nodejs22.x
   stage: ${opt:stage, 'dev'}
   region: 'us-east-1'
+  environment:
+    MONGODB_URI: ${env:MONGODB_URI}
 
 custom:
   basePath:
@@ -13,34 +15,23 @@ custom:
     prod: ""
 
 functions:
-  getUsers:
-    handler: src/handlers/GetUsers.handler
-    description: Get all users in platform
+  getUserByEmail:
+    handler: src/interfaces/getUserByEmail.handler
+    description: Get user by email
     events:
       - http:
-          path: /users/get-all-users
+          path: /users/find-user/{email}
           method: get
           cors: true
 
-  findUser:
-    handler: src/handlers/FindUser.handler
-    description: Get all users in platform
+  registerUser:
+    handler: src/interfaces/registerUser.handler
+    description: Register new user manually
     events:
       - http:
-          path: /users/find-user
+          path: /users/register
           method: post
           cors: true
-          private: true
-
-  createUsers:
-    handler: src/handlers/CreateUsers.handler
-    description: Create users in platform
-    events:
-      - http:
-          path: /users/create-user
-          method: post
-          cors: true
-          private: true
 
 
 plugins:

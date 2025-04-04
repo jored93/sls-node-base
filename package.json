@@ -11,11 +11,15 @@
   "license": "ISC",
   "devDependencies": {
     "@types/aws-lambda": "^8.10.147",
+    "@types/node": "^22.14.0",
     "serverless-offline": "^14.4.0",
     "typescript": "^5.8.2"
   },
   "dependencies": {
     "@aws-lambda-powertools/logger": "^2.16.0",
-    "@middy/core": "^6.1.6"
+    "@middy/core": "^6.1.6",
+    "bcryptjs": "^3.0.2",
+    "mongodb": "^6.15.0",
+    "uuid": "^11.1.0"
   }
 }
